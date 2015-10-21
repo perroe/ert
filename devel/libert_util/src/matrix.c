@@ -1387,8 +1387,8 @@ bool matrix_equal( const matrix_type * m1 , const matrix_type * m2) {
     int i,j;
     for (i=0; i < m1->rows; i++) {
       for (j=0; j < m1->columns; j++) {
-        int index1 = GET_INDEX(m1 , i , j);
-        int index2 = GET_INDEX(m2 , i , j);
+        size_t index1 = GET_INDEX(m1 , i , j);
+        size_t index2 = GET_INDEX(m2 , i , j);
         double d1 = m1->data[ index1 ];
         double d2 = m2->data[ index2 ];
 

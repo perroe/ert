@@ -367,8 +367,8 @@ bool util_float_approx_equal__( float d1 , float d2, float epsilon) {
   if (d1 == d2)
     return true;
   else {
-    float diff = fabs(d1 - d2);
-    float sum  = fabs(d1) + fabs(d2);
+    float diff = fabsf(d1 - d2);
+    float sum  = fabsf(d1) + fabsf(d2);
 
     if ((diff / sum) < epsilon)
       return true;
@@ -522,18 +522,18 @@ bool util_fseek_string(FILE * stream , const char * __string , bool skip_string 
   if (!case_sensitive)
     util_strupr( string );
   {
-    int len              = strlen( string );
-    long int initial_pos = util_ftell( stream );   /* Store the inital position. */
-    bool cont            = true;
+    size_t len              = strlen( string );
+    offset_type initial_pos = util_ftell( stream );   /* Store the inital position. */
+    bool cont               = true;
     do {
       int c = fgetc( stream );
       if (!case_sensitive)
         c = toupper( c );
 
       if (c == string[0]) {  /* OK - we got the first character right - lets try in more detail: */
-        long int current_pos  = util_ftell(stream);
-        bool     equal        = true;
-        int string_index;
+        offset_type current_pos = util_ftell(stream);
+        bool     equal          = true;
+        size_t string_index;
         for (string_index = 1; string_index < len; string_index++) {
           c = fgetc( stream );
           if (!case_sensitive)
